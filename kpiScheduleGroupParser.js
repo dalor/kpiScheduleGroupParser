@@ -46,6 +46,9 @@ const ShowScheduleUrl = (group, type, hidden_values, funct) => {
             rurl.hostname = hostname;
             funct(rurl);
         }
+        else {
+            funct(null);
+        }
     })
     req.write(postData);
     req.end();  
@@ -109,12 +112,17 @@ const ParseTables = (url, funct) => {
     }).end();
 }
 
-module.exports = (group, funct) => {
+module.exports = (group, funct, error) => {
     ShowHiddenValues((hidden_values) => {
         ShowScheduleUrl(group, 'Розклад занять', hidden_values, (url) => {
-            ParseTables(url, (first, second) => {
-                funct(first, second);
-            })
+            if (url) {
+                ParseTables(url, (first, second) => {
+                    funct(first, second);
+                })
+            }
+            else {
+                error();
+            }
         })
     })
 }
