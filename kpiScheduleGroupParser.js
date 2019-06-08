@@ -41,9 +41,11 @@ const ShowScheduleUrl = (group, type, hidden_values, funct) => {
         }
       };
     const req = http.request(options, (res) => {
-        const rurl = url_parser.parse(res.headers.location);
-        rurl.hostname = hostname;
-        funct(rurl);
+        if (res.headers.location) {
+            const rurl = url_parser.parse(res.headers.location);
+            rurl.hostname = hostname;
+            funct(rurl);
+        }
     })
     req.write(postData);
     req.end();  
@@ -52,7 +54,27 @@ const ShowScheduleUrl = (group, type, hidden_values, funct) => {
 const OptimizeValue = (element) => {
     const as = element.getElementsByTagName('a');
     if (as.length) {
-        return as[0].textContent;
+        const res = {
+            subject: {text: as[0].textContent,
+                 url: as[0].getAttribute('href')},
+            teachers: [],
+            places: []
+        } 
+        for (let i = 1; i < as.length; i++){
+            const url = as[i].getAttribute('href');
+            const item = {
+                text: as[i].textContent,
+                url: url
+            }
+            if (url.startsWith('/Schedules/ViewSchedule.aspx')){
+                item.url = `http://${hostname}${item.url}`;
+                res.teachers.push(item);
+            }
+            else {
+                res.places.push(item);
+            }
+        }
+        return res;        
     }
     else {
         return null;
@@ -61,10 +83,10 @@ const OptimizeValue = (element) => {
 
 const ParseWeek = (table) => {
     const table_rows = table.getElementsByTagName('tr');
-    const result = {0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}};
+    const result = [[], [], [], [], [], []];
     for (let r = 1; r <= 5; r++){
         const row = table_rows[r].getElementsByTagName('td');
-        for (let d = 1; d < 7; d++){
+        for (let d = 1; d <= 6; d++){
             result[d-1][r-1] = OptimizeValue(row[d]);
         }
     }
