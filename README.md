@@ -1,6 +1,6 @@
 # kpiScheduleGroupParser [![Build Status](https://travis-ci.org/dalor/kpiScheduleGroupParser.svg?branch=master)](https://travis-ci.org/dalor/kpiScheduleGroupParser)
 
-**Simple api to get clear schedule from [http://rozklad.kpi.ua](http://http://rozklad.kpi.ua "http://rozklad.kpi.ua")**
+**Simple api to get clear schedule from [rozklad.kpi.ua](http://rozklad.kpi.ua "rozklad.kpi.ua")**
 
 Just use 
 
