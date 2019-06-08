@@ -7,7 +7,7 @@ Just use
 `?group=GROUP_ID`
 
 And you wil get such answer:
-``javascript
+```javascript
 [
 	[ // first week
 		[ // Monday
