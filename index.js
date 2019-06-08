@@ -14,4 +14,7 @@ module.exports = (req, res) => {
             res.end('Nope');
         })
     }
+    else {
+        res.end('?group=GROUP_ID');
+    }
 }
