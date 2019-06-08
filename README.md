@@ -9,9 +9,9 @@ Just use
 And you wil get such answer:
 ```json
 [
-	[ # first week
-		[ # Monday
-			{ # 1 lesson
+	[
+		[ 
+			{ 
 				"subject": {
 					"text": ... ,
 					"url": ...
@@ -21,22 +21,22 @@ And you wil get such answer:
 						"text": ... ,
 						"url": ...
 					},
-					... # list of teachers
+					
 				]
 				"places": [
 					{
 						"text": ... ,
 						"url": ...
 					},
-					... # list of places
+					
 				]
 			}
-			... # list of lessons from 1 to 5
+			
 		]
-		... # list of weekdays [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday]
+		
 	],
-	[ # second week
-		.... # the same
+	[ 
+		.... 
 	]
 ]
 ```
